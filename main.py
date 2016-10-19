@@ -6,7 +6,9 @@ from stravalib import client
 
 from config import *
 
+
 app = Flask(__name__)
+
 
 @app.route('/auth')
 def auth():
@@ -15,6 +17,7 @@ def auth():
                                                scope='view_private',
                                                redirect_uri='http://127.0.0.1:8080/auth_done')
     return render_template('auth.html', auth_url=auth_url)
+
 
 @app.route('/auth_done')
 def auth_done():
@@ -26,6 +29,7 @@ def auth_done():
     session['access_token'] = token
     return redirect(url_for('home'))
 
+
 @app.route('/home')
 def home():
     if 'access_token' not in session:
@@ -35,6 +39,7 @@ def home():
     athlete = strava_client.get_athlete()
     streams = strava_client.get_activity_streams(123, types=['time', 'latlng', 'altitude'], resolution='medium')
     return render_template('home.html', athlete=athlete, streams=streams)
+
 
 @app.route('/logout')
 def logout():
