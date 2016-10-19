@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Stravadora - Home</title>
+  </head>
+  <body>
+    <div class="box">
+      <div class="content-box">
+        <div class="content">
+          <p>
+            Muito obrigado, {{ athlete.firstname }}, por contribuir com nossa pesquisa!
+          </p>
+          <p>
+            Se quiser, pode <a href="/logout">logar com outra conta</a>.
+          </p>
+        </div>
+        <div class="content">
+          <p>
+            Dados:
+          </p>
+          <pre>
+            {{ streams | to_nice_json(indent=2) }}
+          </pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

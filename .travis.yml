@@ -9,4 +9,6 @@ deploy:
   project: stravadora
 before_install:
 - openssl aes-256-cbc -K $encrypted_579d7381f1bb_key -iv $encrypted_579d7381f1bb_iv
+  -in config.py.enc -out config.py -d
+- openssl aes-256-cbc -K $encrypted_579d7381f1bb_key -iv $encrypted_579d7381f1bb_iv
   -in stravadora-fd82e64ea673.json.enc -out stravadora-fd82e64ea673.json -d
