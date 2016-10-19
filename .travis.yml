@@ -1,0 +1,4 @@
+deploy:
+  provider: gae
+  keyfile: "stravadora-4e04d0d35e23.json.enc"
+  project: "stravadora"
