@@ -1,3 +1,7 @@
+language: python
+python:
+  - "2.7"
+install: "pip install -r requirements.txt"
 deploy:
   provider: gae
   keyfile: "stravadora-4e04d0d35e23.json.enc"
