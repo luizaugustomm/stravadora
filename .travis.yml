@@ -7,6 +7,7 @@ deploy:
   provider: gae
   keyfile: stravadora-4b634edeaf65.json
   project: stravadora
+  skip_cleanup: true
 before_install:
 - openssl aes-256-cbc -K $encrypted_579d7381f1bb_key -iv $encrypted_579d7381f1bb_iv
   -in secrets.tar.enc -out secrets.tar -d
