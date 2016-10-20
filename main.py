@@ -29,11 +29,11 @@ def auth_done():
     session['access_token'] = token
     return redirect(url_for('home'))
 
-
+@app.route('/')
 @app.route('/home')
 def home():
     if 'access_token' not in session:
-        return redirect(url_for(auth))
+        return redirect(url_for('auth'))
 
     strava_client = client.Client(access_token=session.get('access_token'))
     athlete = strava_client.get_athlete()
