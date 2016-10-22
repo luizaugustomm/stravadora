@@ -1,1 +1,1 @@
-web: gunicorn -b 127.0.0.1:8080 main:app --log-file -
+web: gunicorn -b 127.0.0.1:$PORT main:app --log-file -

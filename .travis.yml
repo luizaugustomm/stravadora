@@ -6,11 +6,7 @@ install:
 - pip install -t lib requests==2.3 --upgrade
 script: nosetests
 deploy:
-  provider: gae
-  keyfile: stravadora-4b634edeaf65.json
-  project: stravadora
+  provider: heroku
+  api_key:
+    secure: FWEfr4BHRlkqZ0SeC/4vYhEeNoJ9yGkgWxWsDyzQAdvDvdyOmy4LBLnQ8MxRq8dOhwcTr4MAzNb5CZHFMDjJF8W6rin0RaHUABjFUE5SvWf3LDbh8hVLWwG+xhBc5rRZPHVzTzh8V426aeAvdh+bJ3GdXxPn5HiT4sv4wwI1H/3CW2dUujTMwBVjzgIyf8oWvqw4f8+C4R7uj4A5nwMCTkhuXEZRHMr9ZFD860z6k+IK2pKnhr4VrS0g7NSmB8MWYP83IWFZWY9Rr60M3TsXvGYOAF2xeVjJjJy2oAXcx4SP9qAMRtXkcwjOSNRjmmELySVcLlH7w8vuowGBm1ZCHEybVCxo1qsbdnun1ULKFJOTctmcJZIVtmKud16MJ9zydyV7RpbABzhSSClqWzw9QcNj5SRkpezMxiFB0vEPJtS5mgwhYryyr0l2Q4jcS4bH8QM411Rm5XNXmdgJIM9+y9VlKVpi1TIjKmYREmtc5j+5BJn5aRnGVbKaKx+XXyP8Fh0E41CzCRA4ko5eQM8Znz53Ao/Xbtjaj2v1lYlBi6uYIi5+HSwBVx+Tkob24CLd+YkBLXmyGwQURwR1YR9o+vQmyB2FgCtu/Kt7DjpuIjTbGaXltqeS9QauH+yxkF7o4zmzEAU92LjeYV+fbEOu7AtKBUP2pDGSj7rsUuFjNds=
   skip_cleanup: true
-before_install:
-- openssl aes-256-cbc -K $encrypted_579d7381f1bb_key -iv $encrypted_579d7381f1bb_iv
-  -in secrets.tar.enc -out secrets.tar -d
-- tar xvf secrets.tar
