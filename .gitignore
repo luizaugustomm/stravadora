@@ -92,3 +92,4 @@ ENV/
 config.py
 stravadora-4b634edeaf65.json
 secrets.tar
+.env

@@ -1,13 +1,17 @@
 
+import os
+
 from flask import Flask
 from flask import render_template, request, redirect, session, url_for
 
 from stravalib.client import Client
 
-from config import *
 
 app = Flask(__name__)
-app.secret_key = APP_SECRET
+app.secret_key = os.environ.get('APP_SECRET')
+
+CLIENT_ID = os.environ.get('CLIENT_ID')
+CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 
 
 @app.route('/auth')
