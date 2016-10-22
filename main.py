@@ -9,9 +9,9 @@ from stravalib.client import Client
 DEBUG = False
 
 if DEBUG:
-    uri = '127.0.0.1:8080/auth_done'
+    uri = 'http://127.0.0.1:8080/auth_done'
 else:
-    uri = 'stravadora.herokuapp.com/auth_done'
+    uri = 'http://stravadora.herokuapp.com/auth_done'
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('APP_SECRET')
@@ -46,7 +46,10 @@ def home():
 
     client = Client(access_token=session.get('access_token'))
     athlete = client.get_athlete()
-    streams = client.get_activity_streams(athlete.id, types=['time', 'latlng', 'altitude'], resolution='medium')
+    activities = client.get_activities()
+    streams = {}
+    for activity in activities:
+        streams[activity.id] = client.get_activity_streams(activity.id, types=['latlng'], resolution='medium', series_type='time')
     return render_template('home.html', athlete=athlete, streams=streams)
 
 
