@@ -1,0 +1,1 @@
+web: gunicorn -b localhost:8080 main:app --log-file -

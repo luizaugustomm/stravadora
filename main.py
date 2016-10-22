@@ -6,6 +6,12 @@ from flask import render_template, request, redirect, session, url_for
 
 from stravalib.client import Client
 
+DEBUG = False
+
+if DEBUG:
+    uri = '127.0.0.1:8080/auth_done'
+else:
+    uri = 'stravadora.herokuapp.com/auth_done'
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('APP_SECRET')
@@ -19,7 +25,7 @@ def auth():
     client = Client()
     auth_url = client.authorization_url(client_id=CLIENT_ID,
                                         scope='view_private',
-                                        redirect_uri='auth_done')
+                                        redirect_uri=uri)
     return render_template('auth.html', auth_url=auth_url)
 
 
