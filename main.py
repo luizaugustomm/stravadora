@@ -19,7 +19,7 @@ def auth():
     client = Client()
     auth_url = client.authorization_url(client_id=CLIENT_ID,
                                         scope='view_private',
-                                        redirect_uri='stravadora.heroku.com/auth_done')
+                                        redirect_uri='auth_done')
     return render_template('auth.html', auth_url=auth_url)
 
 
