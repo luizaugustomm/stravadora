@@ -3,8 +3,10 @@ import os
 
 from flask import Flask
 from flask import render_template, request, redirect, session, url_for
+from flask.ext.sqlalchemy import SQLAlchemy
 
 from stravalib.client import Client
+
 
 DEBUG = False
 
@@ -14,10 +16,14 @@ else:
     uri = 'http://stravadora.herokuapp.com/auth_done'
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('APP_SECRET')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
+app.secret_key = os.environ.get('APP_SECRET')
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
+
+db = SQLAlchemy(app)
 
 
 @app.route('/auth')
