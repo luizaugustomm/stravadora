@@ -11,19 +11,12 @@
       <div class="content-box">
         <div class="content">
           <p>
-            Muito obrigado, {{ athlete.firstname }}, por contribuir com nossa pesquisa!
+            Muito obrigado, {{ athlete.firstname }}, por contribuir com nossa pesquisa!<br>
+            Seu ID é: {{ athlete.id }}
           </p>
           <p>
             Se quiser, pode <a href="/logout">logar com outra conta</a>.
           </p>
-        </div>
-        <div class="content">
-          <p>
-            Dados:
-          </p>
-          <pre>
-            {{ streams }}
-          </pre>
         </div>
       </div>
     </div>

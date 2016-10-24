@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from stravalib.client import Client
 
 from stravadora.settings import DEBUG, SECRET_KEY, CLIENT_ID, CLIENT_SECRET
+from app.models import Athlete, Activity
 
 if DEBUG:
     uri = 'http://127.0.0.1:8080/auth_done'
@@ -22,16 +23,22 @@ def auth_done(request):
                                                   client_secret=CLIENT_SECRET,
                                                   code=code)
     request.session['access_token'] = access_token
-    return redirect('/')
+    return redirect('home')
 
 def home(request):
     if 'access_token' not in request.session:
         return redirect('auth')
-
     client = Client(access_token=request.session.get('access_token'))
     athlete = client.get_athlete()
+    db_athlete = Athlete.create(athlete)
+    db_athlete.save()
     activities = client.get_activities()
-    streams = {}
     for activity in activities:
-        streams[activity.id] = client.get_activity_streams(activity.id, types=['latlng'], resolution='medium', series_type='time')
-    return render(request, 'home.html', {'athlete': athlete, 'streams': streams})
+        stream = client.get_activity_streams(activity.id, types=['latlng'], resolution='medium').get('latlng')
+        db_activity = Activity.create(activity, db_athlete, stream.data)
+        db_activity.save()
+    return render(request, 'home.html', {'athlete': athlete})
+
+def logout(request):
+    request.session.pop('access_token')
+    return redirect('auth')
