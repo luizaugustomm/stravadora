@@ -10,11 +10,28 @@
     <div class="box">
       <div class="content-box">
         <div class="content">
+          <div class="logo">
+            <img src="{% static 'img/ufcg_logo.png' %}" alt="UFCG" width="100px" height="100px">
+          </div>
+          <div class="logo">
+            <img src="{% static 'img/lsd_logo.png' %}" alt="LSD" width="100px" height="100px">
+          </div>
+          <div class="logo">
+            <img src="{% static 'img/analytics_logo.png' %}" alt="Analytics" width="100px" height="100px">
+          </div>
+        </div>
+        <div class="content border shadow">
           <p>
-            Conecte-se ao Strava para ceder seus dados à pesquisa
+            Conecte-se ao Strava para ceder seus dados* e contribuir com nossa pesquisa.
           </p>
           <p>
             <a href="{{ auth_url }}"><img src="{% static 'img/strava_button.png' %}" alt="Connect to Strava"></a>
+          </p>
+        </div>
+        <div class="content" style="font-size: 9.5px; text-align: left!important">
+          <p>
+            *<strong>Dados do usuário</strong>: ID do usuário no strava, sexo, cidade, exercício padrão, email (prometemos não te enviar spam :] )<br>
+            *<strong>Dados de atividades</strong>: ID da atividade, data de início, tipo de atividade, é trajeto cotidiano, dados do trajeto (latitude e longitude)
           </p>
         </div>
       </div>

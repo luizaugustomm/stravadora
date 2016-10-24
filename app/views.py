@@ -28,16 +28,27 @@ def auth_done(request):
 def home(request):
     if 'access_token' not in request.session:
         return redirect('auth')
+    # Retrieving athlete's data from API
     client = Client(access_token=request.session.get('access_token'))
     athlete = client.get_athlete()
-    db_athlete = Athlete.create(athlete)
-    db_athlete.save()
-    activities = client.get_activities()
+    # Checking if the athlete has already visited the site before
+    try:
+        db_athlete = Athlete.objects.get(id=athlete.id)
+    except Athlete.DoesNotExist:
+        db_athlete = Athlete.create(athlete)
+        db_athlete.save()
+    # Getting the latest activity from the current athlete
+    try:
+        latest_activity = Activity.objects.filter(athlete=db_athlete).latest('date')
+        activities = client.get_activities(after=latest_activity.date)
+    except Activity.DoesNotExist:
+        activities = client.get_activities()
+    # Adding new activities to the database
     for activity in activities:
         stream = client.get_activity_streams(activity.id, types=['latlng'], resolution='medium').get('latlng')
         db_activity = Activity.create(activity, db_athlete, stream.data)
         db_activity.save()
-    return render(request, 'home.html', {'athlete': athlete})
+    return render(request, 'home.html', {'athlete': athlete, 'activities': activities})
 
 def logout(request):
     request.session.pop('access_token')

@@ -18,10 +18,12 @@ class Athlete(models.Model):
 
 class Activity(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
+    date = models.DateTimeField()
     athlete = models.ForeignKey('Athlete', on_delete=models.CASCADE)
+    type = models.CharField(max_length=50)
     commute = models.BooleanField()
     stream = ArrayField(ArrayField(models.FloatField(), size=2))
 
     @classmethod
     def create(cls, act, ath, strm):
-      return cls(id=act.id, athlete=ath, commute=act.commute, stream=strm)
+      return cls(id=act.id, date=act.start_date, athlete=ath, type=act.type, commute=act.commute, stream=strm)

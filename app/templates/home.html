@@ -18,6 +18,13 @@
             Se quiser, pode <a href="/logout">logar com outra conta</a>.
           </p>
         </div>
+        <div class="content">
+        {% for activity in activities %}
+          <p>
+            {{ activity.id }}: {{ activity.start_date }}
+          </p>
+        {% endfor %}
+        </div>
       </div>
     </div>
   </body>
