@@ -48,7 +48,7 @@ def home(request):
         stream = client.get_activity_streams(activity.id, types=['latlng'], resolution='medium').get('latlng')
         db_activity = Activity.create(activity, db_athlete, stream.data)
         db_activity.save()
-    return render(request, 'home.html', {'athlete': athlete, 'activities': activities})
+    return render(request, 'home.html', {'athlete': athlete, 'activities': activities, 'act_length': len(list(activities))})
 
 def logout(request):
     request.session.pop('access_token')

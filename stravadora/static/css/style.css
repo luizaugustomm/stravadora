@@ -27,7 +27,6 @@ body {
   padding: 5px 15px 5px 15px;
   display: table;
   margin: 0 auto;
-  text-align: center;
 }
 
 .border {
@@ -42,5 +41,5 @@ body {
 
 .logo {
   float: left;
-  margin: 0px 30px 20px 30px;
+  margin: 20px 30px 0px 30px;
 }
