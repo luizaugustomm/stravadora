@@ -18,6 +18,7 @@ class Athlete(models.Model):
 
 class Activity(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
+    name = models.CharField(max_length=250)
     date = models.DateTimeField()
     athlete = models.ForeignKey('Athlete', on_delete=models.CASCADE)
     type = models.CharField(max_length=50)
@@ -26,4 +27,5 @@ class Activity(models.Model):
 
     @classmethod
     def create(cls, act, ath, strm):
-      return cls(id=act.id, date=act.start_date, athlete=ath, type=act.type, commute=act.commute, stream=strm)
+      return cls(id=act.id, name=act.name, date=act.start_date, athlete=ath,
+                 type=act.type, commute=act.commute, stream=strm)

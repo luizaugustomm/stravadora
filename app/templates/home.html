@@ -9,22 +9,41 @@
   <body>
     <div class="box">
       <div class="content-box">
-        <div class="content">
+        <div class="content border">
           <p>
+            Seu ID é: {{ athlete.id }}.<br>
             Muito obrigado, {{ athlete.firstname }}, por contribuir com nossa pesquisa!<br>
-            Seu ID é: {{ athlete.id }}
+            {% if len(activities) == 0 %}
+            Você não realizou atividades desde a última visita.
+            {% elif len(activities) == 1 %}
+            Você realizou uma atividade desde a última visita!
+            {% else %}
+            Você realizou {{ len(activities) }} atividades desde a última visita!
+            {% endif %}
           </p>
           <p>
             Se quiser, pode <a href="/logout">logar com outra conta</a>.
           </p>
         </div>
+        {% if activities %}
         <div class="content">
-        {% for activity in activities %}
-          <p>
-            {{ activity.id }}: {{ activity.start_date }}
+          <p style="text-align:left">
+            Últimas atividades:
           </p>
-        {% endfor %}
+          <table>
+            <tr>
+                <th>Nome</th>
+                <th>Data</th>
+            </tr>
+            {% for activity in activities %}
+            <tr>
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.date }}</td>
+            </tr>
+            {% endfor %}
+          </table>
         </div>
+        {% endif %}
       </div>
     </div>
   </body>
