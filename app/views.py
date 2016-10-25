@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from stravalib.client import Client
+from requests import HTTPError
 
 from stravadora.settings import DEBUG, SECRET_KEY, CLIENT_ID, CLIENT_SECRET
 from app.models import Athlete, Activity
@@ -45,9 +46,10 @@ def home(request):
         activities = client.get_activities()
     # Adding new activities to the database
     for activity in activities:
-        stream = client.get_activity_streams(activity.id, types=['latlng'], resolution='medium').get('latlng')
-        db_activity = Activity.create(activity, db_athlete, stream.data)
-        db_activity.save()
+        if not activity.manual:
+            stream = client.get_activity_streams(activity.id, types=['latlng'], resolution='medium').get('latlng')
+            db_activity = Activity.create(activity, db_athlete, stream.data)
+            db_activity.save()
     return render(request, 'home.html', {'athlete': athlete, 'activities': activities, 'act_length': len(list(activities))})
 
 def logout(request):
