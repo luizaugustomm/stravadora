@@ -27,5 +27,5 @@ class Activity(models.Model):
 
     @classmethod
     def create(cls, act, ath, strm):
-      return cls(id=act.id, name=act.name, date=act.start_date_local, athlete=ath,
+      return cls(id=act.id, name=act.name, date=act.start_date, athlete=ath,
                  type=act.type, commute=act.commute, stream=strm)
