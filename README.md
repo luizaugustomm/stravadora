@@ -2,4 +2,4 @@
 
 [![Build Status](https://travis-ci.org/luizaugustomm/stravadora.svg?branch=master)](https://travis-ci.org/luizaugustomm/stravadora)
 
-GAE app to collect Strava users data for research purposes
+Heroku app to collect Strava users data for research purposes
